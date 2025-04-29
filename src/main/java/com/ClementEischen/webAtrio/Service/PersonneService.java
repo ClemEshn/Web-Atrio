@@ -75,6 +75,11 @@ public class PersonneService {
     
         return personnes;
     }
+    public List<Emploi> getEmploisByDateRange(Long personneId, LocalDate from, LocalDate to) {
+        Personne personne = personneRepository.findById(personneId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Personne non trouvée"));
+        return emploiRepository.findByPersonneAndDateDebutGreaterThanEqualAndDateFinLessThanEqual(personne, from, to);
+    }
     
     
 }
