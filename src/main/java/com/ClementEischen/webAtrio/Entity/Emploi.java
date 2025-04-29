@@ -32,7 +32,7 @@ public class Emploi {
         return id;
     }
 
-    public String getEntreprise() {
+    public String getNomEntreprise() {
         return entreprise;
     }
 

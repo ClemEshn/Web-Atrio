@@ -58,5 +58,23 @@ public class PersonneService {
     
         return personnes;
     }
+
+    public List<Personne> getPersonnesByEntreprise(String nomEntreprise) {
+        List<Personne> personnes = personneRepository.findAllByEntreprise(nomEntreprise);
+    
+        for (Personne p : personnes) {    
+            int age = (int) ChronoUnit.YEARS.between(p.getDateNaissance(), LocalDate.now());
+            p.setAge(age);
+    
+            List<Emploi> emploisDansEntreprise = p.getEmplois().stream()
+                    .filter(e -> e.getNomEntreprise().equalsIgnoreCase(nomEntreprise))
+                    .collect(Collectors.toList());
+    
+            p.setEmplois(emploisDansEntreprise);
+        }
+    
+        return personnes;
+    }
+    
     
 }

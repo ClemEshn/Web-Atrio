@@ -32,4 +32,10 @@ public class PersonneController {
         List<Personne> personnes = personneService.getAllPersonnes();
         return ResponseEntity.ok(personnes);
     }
+
+    @GetMapping("/entreprise")
+    public ResponseEntity<List<Personne>> getPersonnesByEntreprise(@RequestParam String nom) {
+        return ResponseEntity.ok(personneService.getPersonnesByEntreprise(nom));
+    }
+
 }
