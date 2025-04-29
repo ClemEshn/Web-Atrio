@@ -24,4 +24,43 @@ public class Personne {
 
     @OneToMany(mappedBy = "personne", cascade = CascadeType.ALL)
     private List<Emploi> emplois = new ArrayList<>();
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public String getPrenom() {
+        return prenom;
+    }
+
+    public LocalDate getDateNaissance() {
+        return dateNaissance;
+    }
+
+    public List<Emploi> getEmplois() {
+        return emplois;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
+    }
+
+    public void setDateNaissance(LocalDate dateNaissance) {
+        this.dateNaissance = dateNaissance;
+    }
+
+    //to do : changer en addEmploi et remove emploi 
+    public void setEmplois(List<Emploi> emplois) {
+        this.emplois = emplois;
+    }
+
+    
 }

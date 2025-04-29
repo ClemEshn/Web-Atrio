@@ -15,7 +15,7 @@ public class Emploi {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String nomEntreprise;
+    private String entreprise;
     private String poste;
 
     private LocalDate dateDebut;
@@ -24,4 +24,51 @@ public class Emploi {
     @ManyToOne
     @JoinColumn(name = "personne_id")
     private Personne personne;
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getEntreprise() {
+        return entreprise;
+    }
+
+    public String getPoste() {
+        return poste;
+    }
+
+    public LocalDate getDateDebut() {
+        return dateDebut;
+    }
+
+    public LocalDate getDateFin() {
+        return dateFin;
+    }
+
+    public Personne getPersonne() {
+        return personne;
+    }
+
+    public void setEntreprise(String entreprise) {
+        this.entreprise = entreprise;
+    }
+
+    public void setPoste(String poste) {
+        this.poste = poste;
+    }
+
+    public void setDateDebut(LocalDate dateDebut) {
+        this.dateDebut = dateDebut;
+    }
+
+    public void setDateFin(LocalDate dateFin) {
+        this.dateFin = dateFin;
+    }
+
+    public void setPersonne(Personne personne) {
+        this.personne = personne;
+    }
+
+    
+    
 }
