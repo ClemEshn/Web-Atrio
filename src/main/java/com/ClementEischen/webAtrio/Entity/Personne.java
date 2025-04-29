@@ -10,6 +10,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Transient;
 
 @Entity
 public class Personne {
@@ -21,6 +22,9 @@ public class Personne {
     private String prenom;
 
     private LocalDate dateNaissance;
+    @Transient
+    private int age;
+    
 
     @OneToMany(mappedBy = "personne", cascade = CascadeType.ALL)
     private List<Emploi> emplois = new ArrayList<>();
@@ -60,6 +64,14 @@ public class Personne {
     //to do : changer en addEmploi et remove emploi 
     public void setEmplois(List<Emploi> emplois) {
         this.emplois = emplois;
+    }
+
+    public int getAge() {
+        return age;
+    }
+    
+    public void setAge(int age) {
+        this.age = age;
     }
 
     

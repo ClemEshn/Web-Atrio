@@ -3,12 +3,15 @@ package com.ClementEischen.webAtrio.Service;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.ClementEischen.webAtrio.DTO.CreatePersonneDTO;
+import com.ClementEischen.webAtrio.Entity.Emploi;
 import com.ClementEischen.webAtrio.Entity.Personne;
 import com.ClementEischen.webAtrio.Repository.EmploiRepository;
 import com.ClementEischen.webAtrio.Repository.PersonneRepository;
@@ -37,8 +40,23 @@ public class PersonneService {
 
         return personneRepository.save(personne);
     }
+
     public List<Personne> getAllPersonnes() {
-        return personneRepository.findAll();
+        List<Personne> personnes = personneRepository.findAll(Sort.by("nom").ascending());
+    
+        for (Personne p : personnes) {
+            p.getEmplois().size();
+            int age = (int) ChronoUnit.YEARS.between(p.getDateNaissance(), LocalDate.now());
+            p.setAge(age);
+    
+            List<Emploi> emploisActuels = p.getEmplois().stream()
+                    .filter(e -> e.getDateFin() == null || e.getDateFin().isAfter(LocalDate.now()))
+                    .collect(Collectors.toList());
+    
+            p.setEmplois(emploisActuels);
+        }
+    
+        return personnes;
     }
     
 }

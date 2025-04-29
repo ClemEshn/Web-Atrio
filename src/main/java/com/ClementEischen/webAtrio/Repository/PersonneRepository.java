@@ -1,6 +1,11 @@
 package com.ClementEischen.webAtrio.Repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
 import com.ClementEischen.webAtrio.Entity.Personne;
 
-public interface PersonneRepository extends JpaRepository<Personne, Long> {}
+public interface PersonneRepository extends JpaRepository<Personne, Long> {
+}
